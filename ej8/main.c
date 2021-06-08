@@ -13,8 +13,7 @@ b) hallar el vértice con el mayor grado de salida, en un digrafo representado p
 de adyacencia.
 c) hallar el vértice con el mayor grado de entrada, en un digrafo representado por una lista de
 adyacencia.
-d) determinar si todos los vértices de un grafo almacenado en media matriz de adyacencia
-(triángulo superior) tienen al menos un vértice adyacente con costo mayor a X (dato).
+
 e) generar un vector de registros con grado y vértice para aquellos vértices, de un grafo
 almacenado en una matriz de adyacencia, cuyo grado sea mayor a 3.*/
 
@@ -48,4 +47,24 @@ int gradoEntrada(int matriz[][max],int vertice,int i){//i entra con orden-1
             return gradoEntrada(matriz,vertice,i-1);
     else
         return 0;
+}
+/*d) determinar si todos los vértices de un grafo almacenado en media matriz de adyacencia
+(triángulo superior) tienen al menos un vértice adyacente con costo mayor a X (dato).*/
+int todosMarcados(int vector[],int orden){
+    int i=0;
+
+    while (i<orden && vector[i]!=0)
+        i++;
+    
+    return i==orden;
+}
+int todosTienenCosto(int matriz[][max],int costo,int i,int j,int orden,int marcados[]){ //i, j entran con orden-1
+    if (i>=0 && j>=0 && !todosMarcados(marcados,orden)){
+        if (matriz[i][j]>=costo){
+            marcados[i]=1;
+            marcados[j]=1;
+        }
+        return (todosTienenCosto(matriz,costo,i-1,j-1,orden,marcados)||todosTienenCosto(matriz,costo,i-1,j,orden,marcados));
+    }else
+        return todosMarcados(marcados,orden);
 }
