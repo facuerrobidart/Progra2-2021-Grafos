@@ -58,16 +58,16 @@ adyacencia.*/
 void mayorEntradaLista(TLista lista[max],int grados[max],TLista aux,int i,int orden,int *gMax,int *vMax){//i entra como ORDEN
     if (i>=0){
         if (aux==NULL){ //este es el ultimo elemento de cada elemento del vector
-            if (i>0)
-                mayorEntradaLista(lista,grados,lista[i-1]->sig,i-1,orden,gMax,vMax);
-            if (i==0){
+            if (i==0){ 
                 *gMax=grados[i];
                 *vMax=i+1;
-            }else
+            }else{
+                mayorEntradaLista(lista,grados,lista[i-1]->sig,i-1,orden,gMax,vMax);
                 if (i<orden && grados[i]>gMax){
                     *gMax=grados[i];
                     *vMax=i+1;
                 }
+            }
         }else{
             grados[aux->etiqueta]++;
             mayorEntradaLista(lista,grados,aux->sig,i,orden,gMax,vMax);
