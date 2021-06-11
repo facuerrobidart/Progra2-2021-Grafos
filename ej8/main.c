@@ -7,10 +7,7 @@ typedef struct nodo{
     struct nodo *sig;
 }nodo;
 typedef nodo *TLista;
-typedef struct{
-    int etiqueta;
-    TLista adyacentes;
-}cabeceras;
+
 typedef struct{
     int grado;
     int vertice;
@@ -58,10 +55,10 @@ void mayorGradoMatriz(int matriz[][max],int i,int j,int orden,int gAct,int *vMax
 /*c) hallar el vértice con el mayor grado de entrada, en un digrafo representado por una lista de
 adyacencia.*/
 
-void mayorEntradaLista(cabeceras lista[max],int grados[max],TLista aux,int i,int orden,int *gMax,int *vMax){//i entra como ORDEN
+void mayorEntradaLista(TLista lista[max],int grados[max],TLista aux,int i,int orden,int *gMax,int *vMax){//i entra como ORDEN
     if (i>=0){
         if (aux==NULL){ //este es el ultimo elemento de cada elemento del vector
-            mayorEntradaLista(lista,grados,lista[i-1].adyacentes,i-1,orden,gMax,vMax);
+            mayorEntradaLista(lista,grados,lista[i-1]->sig,i-1,orden,gMax,vMax);
             if (i==0){
                 *gMax=grados[i];
                 *vMax=i+1;
